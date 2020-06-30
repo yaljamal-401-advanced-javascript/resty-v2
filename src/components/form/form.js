@@ -8,40 +8,49 @@ class Form extends React.Component {
     super(props);
     this.state = {
       url: '',
-      method: '',
+      method: 'get',
       request: {},
     };
   }
 
-  handleSubmit = (e) => {
-    e.preventDefault();
-
-    if (this.state.url && this.state.method) {
-
-      // Make an object that would be suitable for superagent
-      let request = {
-        url: this.state.url,
-        method: this.state.method,
-      };
-
-      // Clear old settings
-      let url = '';
-      let method = '';
-
-      this.setState({ request, url, method });
-      e.target.reset();
-
-    }
-
-    else {
-      alert('missing information');
-    }
-  }
-
-  handleChangeURL = e => {
+  handleChangeURL = (e) => {
     const url = e.target.value;
     this.setState({ url });
   };
+  handleSubmit = async (e) => {
+    e.preventDefault();
+
+    // if (this.state.url && this.state.method) {
+
+    //   // Make an object that would be suitable for superagent
+    //   let request = {
+    //     url: this.state.url,
+    //     method: this.state.method,
+    //   };
+
+    //   // Clear old settings
+    //   let url = '';
+    //   let method = '';
+
+    //   this.setState({ request, url, method });
+    //   e.target.reset();
+
+    // }
+
+    // else {
+    //   alert('missing information');
+    // }
+    try {
+      if (this.state.method === 'get') {
+        const raw = await fetch(this.state.url);
+        const data = await raw.json();
+        this.props.handler(data);
+      } else this.props.handler('Error');
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
 
   handleChangeMethod = e => {
     const method = e.target.id;
