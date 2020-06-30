@@ -11,7 +11,7 @@ import Form from './components/form/form.js';
 class App extends React.Component {
   render() {
     return (
-      <React.Fragment>
+       <React.Fragment>
         <Header />
         <Form />
         <Footer />
