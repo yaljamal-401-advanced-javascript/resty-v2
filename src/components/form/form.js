@@ -19,33 +19,25 @@ class Form extends React.Component {
   };
   handleSubmit = async (e) => {
     e.preventDefault();
-
-    // if (this.state.url && this.state.method) {
-
-    //   // Make an object that would be suitable for superagent
-    //   let request = {
-    //     url: this.state.url,
-    //     method: this.state.method,
-    //   };
-
-    //   // Clear old settings
-    //   let url = '';
-    //   let method = '';
-
-    //   this.setState({ request, url, method });
-    //   e.target.reset();
-
-    // }
-
-    // else {
-    //   alert('missing information');
-    // }
     try {
       if (this.state.method === 'get') {
         const raw = await fetch(this.state.url);
         const data = await raw.json();
-        this.props.handler(data);
-      } else this.props.handler('Error');
+        this.props.handler(data);}
+      // } else if (this.state.method === 'post') {
+      //   const raw = await fetch(this.state.url);
+      //   const data = await raw.json();
+      //   this.props.handler(data);
+      // } else if (this.state.method === 'put') {
+      //   const raw = await fetch(this.state.url);
+      //   const data = await raw.json();
+      //   this.props.handler(data);
+      // } else if (this.state.method === 'delete') {
+      //   const raw = await fetch(this.state.url);
+      //   const data = await raw.json();
+      //   this.props.handler(data);
+      // }
+       else this.props.handler('method error');
     } catch (e) {
       console.log(e);
     }
@@ -74,8 +66,7 @@ class Form extends React.Component {
           </label>
         </form>
         <section className="results">
-          <span className="method">{this.state.request.method}</span>
-          <span className="url">{this.state.request.url}</span>
+    <textarea className="results" placeholder='put your object here' >{this.state.request.method}</textarea>
         </section>
       </>
     );
