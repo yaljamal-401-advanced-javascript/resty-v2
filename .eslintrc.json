@@ -9,7 +9,8 @@
     "globals": {
       "fail":true
     },
-     "extends": ["react-app", "shared-config"],
+    "extends": "react-app",
+
     "parserOptions": {
       "sourceType": "module",
       "ecmaVersion": 2018

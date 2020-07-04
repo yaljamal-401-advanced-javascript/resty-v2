@@ -26,6 +26,8 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-json-pretty": "^2.2.0",
+    "react-loader-spinner": "^3.1.14",
+
     "react-router-dom": "^5.2.0",
     "react-scripts": "^3.4.1",
     "react-test-renderer": "^16.13.1"
@@ -43,6 +45,42 @@
     ]
   },
   "devDependencies": {
+    "babel-eslint": "^10.1.0",
     "enzyme": "^3.11.0"
-  }
+  },
+  "env": {
+    "browser": true,
+    "node": true,
+    "es6": true
+  },
+  "globals": {
+    "fail": true
+  },
+  "plugins": [
+    "react"
+  ],
+  "extends": [
+    "eslint:recommended",
+    "eslint:recommended",
+    "plugin:import/errors",
+    "plugin:import/warnings",
+    "plugin:import/typescript"
+  ],
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "sourceType": "module"
+  },
+  "rules": {
+    "react/jsx-uses-react": "error",
+    "no-undef": 2,
+    "comma-dangle": 0,
+    "react/jsx-uses-vars": 1,
+    "react/display-name": 1,
+    "no-unused-vars": "warn",
+    "no-console": 1,
+    "no-unexpected-multiline": "warn"
+  },
+  "parser": "babel-eslint"
 }

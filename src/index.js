@@ -7,12 +7,11 @@ import App from './app.js';
 class Main extends React.Component {
   render() {
     return (
-      <React.StrictMode>
-        <BrowserRouter>
-          <App />;
+      <BrowserRouter>
+        <App />
       </BrowserRouter>
-      </React.StrictMode>
-    )
+    );
+
   }
 }
 
