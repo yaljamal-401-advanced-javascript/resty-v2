@@ -1,5 +1,5 @@
 import React from 'react';
-
+import Result from '../result/result.js';
 import './form.scss';
 
 class Form extends React.Component {
@@ -10,47 +10,54 @@ class Form extends React.Component {
       url: '',
       method: 'get',
       request: {},
+      body: '',
+      history: [],
+
     };
   }
 
-  handleChangeURL = (e) => {
+  handleChangeURL = e => {
     const url = e.target.value;
     this.setState({ url });
   };
   handleSubmit = async (e) => {
     e.preventDefault();
-
-    // if (this.state.url && this.state.method) {
-
-    //   // Make an object that would be suitable for superagent
-    //   let request = {
-    //     url: this.state.url,
-    //     method: this.state.method,
-    //   };
-
-    //   // Clear old settings
-    //   let url = '';
-    //   let method = '';
-
-    //   this.setState({ request, url, method });
-    //   e.target.reset();
-
-    // }
-
-    // else {
-    //   alert('missing information');
-    // }
     try {
-      if (this.state.method === 'get') {
-        const raw = await fetch(this.state.url);
-        const data = await raw.json();
-        this.props.handler(data);
-      } else this.props.handler('Error');
+      this.props.loaderHandler();
+      let reqOption = {
+        method: this.state.method.toUpperCase(),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+
+      };
+      // console.log('this.state.body =>>',this.state.body)
+      if (this.state.method !== 'get') {
+        reqOption.body = this.state.body;
+      }
+      console.log('reqOption =>>', reqOption);
+      let data = await fetch(this.state.url, reqOption);
+      // console.log('fetch data =>>', await data.json());
+      // console.log('this.props.handler',this.props.handler())
+      let result = await data.json();
+      this.setState({ history: [...this.state.history, <p>{this.state.url + this.state.method}</p>] });
+      let localData = JSON.parse(localStorage.getItem('history') || '[]');
+      console.log('this.state.history =>>', localData);
+      localData.push({ url: this.state.url, method: this.state.method });
+      console.log('localData after push=>>', localData);
+      localStorage.setItem('history', JSON.stringify(localData));
+      this.props.handler(result);
+      this.props.loaderHandler();
     } catch (e) {
       console.log(e);
     }
   }
+  bodyHandler = e => {
+    const data = e.target.value;
 
+    console.log('data =>>', data);
+    this.setState({ body: data });
+  }
 
   handleChangeMethod = e => {
     const method = e.target.id;
@@ -74,9 +81,11 @@ class Form extends React.Component {
           </label>
         </form>
         <section className="results">
-          <span className="method">{this.state.request.method}</span>
-          <span className="url">{this.state.request.url}</span>
+          <textarea onChange={this.bodyHandler}></textarea>
         </section>
+
+        {this.state.history}
+
       </>
     );
   }
