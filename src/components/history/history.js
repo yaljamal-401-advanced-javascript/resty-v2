@@ -11,3 +11,4 @@ const History = (props) => {
   return <div>{results}</div>;
 };
 export default History;
+
