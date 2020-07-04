@@ -48,6 +48,7 @@ class Form extends React.Component {
       localStorage.setItem('history', JSON.stringify(localData));
       this.props.handler(result);
       this.props.loaderHandler();
+
     } catch (e) {
       console.log(e);
     }
@@ -82,6 +83,7 @@ class Form extends React.Component {
         </form>
         <section className="results">
           <textarea onChange={this.bodyHandler}></textarea>
+
         </section>
 
         {this.state.history}
