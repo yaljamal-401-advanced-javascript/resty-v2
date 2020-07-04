@@ -6,7 +6,7 @@
   "scripts": {
     "start": "react-scripts start",
     "lint": "eslint '**/*.js'",
-    "build": "react-scripts build",
+    "build": "CI= react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
@@ -27,7 +27,6 @@
     "react-dom": "^16.13.1",
     "react-json-pretty": "^2.2.0",
     "react-loader-spinner": "^3.1.14",
-
     "react-router-dom": "^5.2.0",
     "react-scripts": "^3.4.1",
     "react-test-renderer": "^16.13.1"

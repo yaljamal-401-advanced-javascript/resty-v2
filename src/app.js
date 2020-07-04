@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Router } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import './app.scss';
 // Let's talk about using index.js and some other name in the component folder
 // There's pros and cons for each way of doing this ...

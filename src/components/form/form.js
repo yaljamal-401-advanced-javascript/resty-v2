@@ -1,5 +1,4 @@
 import React from 'react';
-import Result from '../result/result.js';
 import './form.scss';
 
 class Form extends React.Component {
